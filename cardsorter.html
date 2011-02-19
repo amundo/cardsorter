@@ -3,6 +3,7 @@
 <head>
 <title>cardsorter</title>
 <meta charset=utf-8>
+<!-- fuck google -->
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.8/jquery-ui.min.js" type="text/javascript"></script>
 <script src="http://jquery-ui.googlecode.com/svn/tags/latest/external/jquery.bgiframe-2.1.2.js" type="text/javascript"></script>
@@ -26,17 +27,14 @@ textarea, div.sticky {
 
 div.sticky { 
   padding: 1em;
+  position: fixed;
   cursor: pointer;
   background: yellow;
   font-size: small;
   width: 100px;  
   height: 100px;  
-  top: 200px;
-  position: absolute;
-  left: 200px;
   border: 1px solid #FFCD00;  
   border-top: 10px solid #FFCD00;  
-  overflow: auto;  
  } 
 
 h1 { 
@@ -70,19 +68,27 @@ p#help_content {
 }
   
 
+a#toggle_help { 
+  color: #666;
+  text-decoration: none;
+  font-weight:bold;
+}
+
 </style>
 
 <script>
 
 $(document).ready(function(){
 
-  $('div').draggable();
+  $('.sticky').draggable();
+
+  $('p#help_content').hide(); 
 
   $('textarea').focus();
 
   $('#toggle_help').toggle(
-   function(){ $('#help_content').fadeOut(); $('#toggle_help').html('help'); },
-   function(){ $('#help_content').fadeIn(); $('#toggle_help').html('close'); }
+   function(){ $('#help_content').show(); $('#toggle_help').html('close help'); },
+   function(){ $('#help_content').hide(); $('#toggle_help').html('show help'); }
   )
 
   $('textarea').keyup(function(ev){
@@ -92,13 +98,15 @@ $(document).ready(function(){
         $('<div></div>', {
           'text': $.trim($('textarea').val()),
           'class': 'sticky',
-          'left': '200px',
-          'top': '200px'  
+          'left': Math.floor(Math.random() * $('body').width()),
+          'top': Math.floor(Math.random() * $('body').height()) 
         }).appendTo($('body'));
 
         $('textarea').val('').focus();
 
-        $('div').draggable();
+        $('.sticky').draggable({
+          'stop' : function(){ console.log( JSON.stringify({'top': $(this).position().top, 'left': $(this).position().left,  'content' : $(this).html() }, null, 2)  ) } 
+        });
 
     }
 
@@ -134,7 +142,7 @@ $(document).ready(function(){
 <button id=save>save</button>
 <div id=help>
 <p id=help_content>Type in the box and press enter to create a new note. Double click a note to delete it. Click save to persist your notes across sessions. </p>
-<p><a id=toggle_help href=#toggle_help>hide help</a></p>
+<p><a id=toggle_help href=#toggle_help>show help</a></p>
 </div>
 </body>
 </html>
