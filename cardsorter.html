@@ -27,7 +27,7 @@ div#board {
   width: 800px;
   height: 500px;
   margin: 0 auto;
-  padding: 4em; 
+background:#ccc;
   float:right;
 }
 
@@ -148,8 +148,9 @@ $(document).ready(function(){
           //'top': Math.floor(Math.random() * 80) + '%',
           //'left': Math.floor(Math.random() * $('#board').width()),
           //'top': Math.floor(Math.random() * $('#board').height())
-          'left': Math.floor(Math.random() * $(window).width()) * .6 + 'px',
-          'top': Math.floor(Math.random() * $(window).height()) * .6 + 'px'
+          'left': Math.floor(Math.random() * $('#board').width()) * .6 + 'px',
+          'top': Math.floor(Math.random() * $('#board').height()) * .6 + 'px',
+          'position': 'relative' 
         })
         .appendTo($('#board'));
 
@@ -168,9 +169,23 @@ $(document).ready(function(){
     $('.sticky').draggable({ });
   } ) ;
 
-  $( "button#save" ).click(function(){ 
-   // use localStorage to persist stickies
+
+  $('#save').live('click', function(){ 
+    var stickies = []; 
+    $.each($('div.sticky').not('.hidden'), function(i, sticky) { 
+      stickies.push({  
+        'top': $(this).css('top'),
+        'text': $(this).text(),
+        'left': $(this).css('left'),
+      }) 
+    })  
+  
+    localStorage.stickies = JSON.stringify(stickies);
+    console.log(localStorage.stickies);
   })
+
+
+
 
 })
 
