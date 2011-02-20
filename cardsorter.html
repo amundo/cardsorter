@@ -48,6 +48,9 @@ div.sticky {
   border-top: 10px solid #FFCD00;  
  } 
 
+div.hidden { 
+  visibility: hidden;
+}
 
 #board .sticky{
    -webkit-transform:rotate(-2deg);  
@@ -145,6 +148,8 @@ $(document).ready(function(){
           //'top': Math.floor(Math.random() * 80) + '%',
           //'left': Math.floor(Math.random() * $('#board').width()),
           //'top': Math.floor(Math.random() * $('#board').height())
+          'left': Math.floor(Math.random() * $(window).width()) * .6 + 'px',
+          'top': Math.floor(Math.random() * $(window).height()) * .6 + 'px'
         })
         .appendTo($('#board'));
 
@@ -159,7 +164,7 @@ $(document).ready(function(){
 
 
   $( "div.sticky" ).live('dblclick', function(){ 
-    $(this).remove() ;
+    $(this).addClass('hidden') ;
     $('.sticky').draggable({ });
   } ) ;
 
