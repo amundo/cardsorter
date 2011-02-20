@@ -20,14 +20,25 @@ textarea, div.sticky {
   padding: 1em;
   cursor: pointer;
   font-size: small;
-  width: 100px;  
-  height: 100px;  
   overflow: auto;  
  } 
 
+div#board { 
+  width: 800px;
+  height: 500px;
+  margin: 0 auto;
+  padding: 4em; 
+  float:right;
+}
+
 div.sticky { 
+   /* Firefox */  
+   -moz-box-shadow: -3px 3px 10px rgba(66,66,66,1);  
+   /* Safari+Chrome */  
+   -webkit-box-shadow:  -5px 5px 7px rgba(66,66,66,.5);  
+   /* Opera */  
+   box-shadow:  -5px 5px 7px rgba(66,66,66,.5); 
   padding: 1em;
-  position: fixed;
   cursor: pointer;
   background: yellow;
   font-size: small;
@@ -36,6 +47,36 @@ div.sticky {
   border: 1px solid #FFCD00;  
   border-top: 10px solid #FFCD00;  
  } 
+
+
+#board .sticky{
+   -webkit-transform:rotate(-2deg);  
+   -o-transform:rotate(-2deg);  
+   -moz-transform:rotate(-2deg);  
+}
+
+#board div:nth-child(even) {  
+   -o-transform:rotate(4deg);  
+   -webkit-transform:rotate(4deg);  
+   -moz-transform:rotate(4deg);  
+   position:relative;  
+   top:5px;  
+ }  
+
+#board div:nth-child(3n) {  
+   -o-transform:rotate(-3deg);  
+   -webkit-transform:rotate(-3deg);  
+   -moz-transform:rotate(-3deg);  
+   position:relative;  
+   top:-5px;  
+ }  
+#board div:nth-child(5n) {  
+   -o-transform:rotate(5deg);  
+   -webkit-transform:rotate(5deg);  
+   -moz-transform:rotate(5deg);  
+   position:relative;  
+   top:-10px;  
+ }  
 
 h1 { 
   float:right;
@@ -97,37 +138,34 @@ $(document).ready(function(){
 
         $('<div></div>', {
           'text': $.trim($('textarea').val()),
-          'class': 'sticky',
-          'left': Math.floor(Math.random() * $('body').width()),
-          'top': Math.floor(Math.random() * $('body').height()) 
-        }).appendTo($('body'));
+          'class': 'sticky'
+        })
+        .css({
+          //'left': Math.floor(Math.random() * 80) + '%',
+          //'top': Math.floor(Math.random() * 80) + '%',
+          //'left': Math.floor(Math.random() * $('#board').width()),
+          //'top': Math.floor(Math.random() * $('#board').height())
+        })
+        .appendTo($('#board'));
 
         $('textarea').val('').focus();
 
-        $('.sticky').draggable({
-          'stop' : function(){ console.log( JSON.stringify({'top': $(this).position().top, 'left': $(this).position().left,  'content' : $(this).html() }, null, 2)  ) } 
-        });
+        $('.sticky').draggable({ });
+          //'stop' : function(){ console.log( JSON.stringify({'top': $(this).position().top, 'left': $(this).position().left,  'content' : $(this).html() }, null, 2)  ) } 
 
     }
 
   });
 
 
-  $( "div.sticky" ).live('dblclick', function(){ $(this).remove() } ) ;
+  $( "div.sticky" ).live('dblclick', function(){ 
+    $(this).remove() ;
+    $('.sticky').draggable({ });
+  } ) ;
 
-  $( "button#save" ).click(function(){
-   
-    
+  $( "button#save" ).click(function(){ 
+   // use localStorage to persist stickies
   })
-
-  $( "#group" ).droppable({
-
-    drop: function( event, ui ) {
-      $( this )
-        .addClass( "ui-state-highlight" )
-    }
-  
-  });
 
 })
 
@@ -138,6 +176,7 @@ $(document).ready(function(){
 
 <h1>ctldc card sort</h1>
 <textarea></textarea>
+<div id=board></div>
 
 <button id=save>save</button>
 <div id=help>
