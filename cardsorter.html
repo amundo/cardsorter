@@ -124,6 +124,19 @@ a#toggle_help {
 
 $(document).ready(function(){
 
+
+  if(localStorage.stickies){
+    var stickies = JSON.parse(localStorage.stickies);   
+    $.each(stickies, function(i,sticky){
+      $('<div>', {
+        'css': sticky.css,
+        'class': 'sticky',
+        'text': sticky.text
+      }).appendTo('#board')
+    })
+  }
+
+
   $('.sticky').draggable();
 
   $('p#help_content').hide(); 
