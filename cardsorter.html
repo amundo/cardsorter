@@ -21,7 +21,13 @@ body {
   font-family: sans-serif;
 }
 
-textarea, div.sticky { 
+textarea { 
+  right:0;
+  top:0;
+  position: fixed;
+}
+
+div.sticky { 
   padding: 1em;
   cursor: pointer;
   font-size: small;
@@ -32,8 +38,8 @@ div#board {
   width: 800px;
   height: 500px;
   margin: 0 auto;
-background:#ccc;
-  float:right;
+  background:#ccc;
+  float:left;
 }
 
 div.sticky { 
@@ -47,8 +53,8 @@ div.sticky {
   cursor: pointer;
   background: yellow;
   font-size: small;
-  width: 100px;  
-  height: 100px;  
+  width: 50px;  
+  height: 50px;  
   border: 1px solid #FFCD00;  
   border-top: 10px solid #FFCD00;  
  } 
@@ -168,7 +174,7 @@ $(document).ready(function(){
           //'top': Math.floor(Math.random() * $('#board').height())
           'left': Math.floor(Math.random() * $('#board').width()) * .6 + 'px',
           'top': Math.floor(Math.random() * $('#board').height()) * .6 + 'px',
-          'position': 'relative' 
+          'position': 'absolute' 
         })
         .appendTo($('#board'));
 
@@ -213,8 +219,8 @@ $(document).ready(function(){
 <body>
 
 <h1>ctldc card sort</h1>
-<textarea></textarea>
 <div id=board></div>
+<textarea></textarea>
 
 <button id=save>save</button>
 <div id=help>
