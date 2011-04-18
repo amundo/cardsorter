@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>cardsorter</title>
+<head> <title>cardsorter</title>
 <meta charset=utf-8>
 <!-- fuck google 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.min.js" type="text/javascript"></script>
@@ -141,7 +140,7 @@ $(document).ready(function(){
     var stickies = JSON.parse(localStorage.stickies);   
     $.each(stickies, function(i,sticky){
       $('<div>', {
-        'css': sticky.css,
+        'css': {'position': 'absolute', 'top': sticky.top, 'left': sticky.left} ,
         'class': 'sticky',
         'text': sticky.text
       }).appendTo('#board')
@@ -182,7 +181,6 @@ $(document).ready(function(){
         $('textarea').val('').focus();
 
         $('.sticky').draggable({ });
-          //'stop' : function(){ console.log( JSON.stringify({'top': $(this).position().top, 'left': $(this).position().left,  'content' : $(this).html() }, null, 2)  ) } 
 
     }
 
@@ -200,13 +198,13 @@ $(document).ready(function(){
     $.each($('div.sticky').not('.hidden'), function(i, sticky) { 
       stickies.push({  
         'top': $(this).css('top'),
-        'text': $(this).text(),
         'left': $(this).css('left'),
+        'position': $(this).css('position'),
+        'text': $(this).text(),
       }) 
     })  
   
     localStorage.stickies = JSON.stringify(stickies);
-    console.log(localStorage.stickies);
   })
 
 
