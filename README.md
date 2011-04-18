@@ -1,8 +1,2 @@
-need a stupid simple jquery tool for doing card sorting.
+A little jquery tool for creating and dragging around "sticky notes".
 
-
-[add card]
-
-creates a draggable div
-
-that's it.
