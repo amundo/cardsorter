@@ -17,8 +17,12 @@ $.fn.overlaps = function(selector) {
     }
 };
 
-$.expr[':'].overlaps = function(elem, i, m, array) {
+$.expr[':'].overlappedBy = function(elem, i, m, array) {
     return isOverlapping([elem], array);
+};
+
+$.expr[':'].overlaps = function(elem, i, m, array) {
+    return isOverlapping2([elem], array);
 };
 $.expr[':'].overlapping = $.expr[':'].overlaps;
 
@@ -41,6 +45,30 @@ function filterOverlaps(collection) {
     }
     
     return $.unique(stack);
+}
+
+function isOverlapping2(collection1, collection2) {
+console.log('wtf');
+    var dims1   = getDims(collection1),
+        dims2   = getDims(collection2),
+        index1  = 0,
+        index2  = 0,
+        length1 = dims1.length,
+        length2 = dims2.length,
+        stack = [];
+
+    for (; index1 < length1; index1++) {
+        for (index2 = 0; index2 < length2; index2++) {
+            if (collection1[index1] === collection2[index2]) {
+              continue;                
+            }
+            if (checkOverlap(dims1[index1], dims2[index2])) {
+                stack.push(collection2[index2]);
+            }
+        }
+    }
+    
+    return stack;
 }
 
 function isOverlapping(collection1, collection2) {

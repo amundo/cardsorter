@@ -11,7 +11,7 @@ $(document).ready(function(){
     })
   }
 
-  $('.sticky').draggable().selectable();
+  $('.sticky').draggable();
 
   $('p#help_content').hide(); 
 
@@ -38,7 +38,7 @@ $(document).ready(function(){
 
         $('input').val('').focus();
 
-        $('.sticky').draggable({ });
+        $('.sticky').draggable();
 
     }
 
@@ -48,7 +48,7 @@ $(document).ready(function(){
   $( "div.sticky" ).live('dblclick', function(){ 
     $(this).addClass('hidden') ;
     $('.sticky').draggable({ });
-  } ) ;
+  } );
 
 
   $('#save').live('click', function(){ 
