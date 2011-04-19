@@ -99,19 +99,15 @@ button#save {
   position:fixed;
 }
 
-div#help { 
+div#help a { 
   padding: 1em;
   width: 300px; 
   font-size: small;
-  left:0;
   bottom:0;
+  left:0;
   position:fixed;
 }
 
-p#help_content { 
-  border: 1px solid #565;
-  padding: 1em;
-}
   
 
 a#toggle_help { 
