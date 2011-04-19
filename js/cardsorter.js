@@ -30,8 +30,8 @@ $(document).ready(function(){
           'class': 'sticky'
         })
         .css({
-          'left': Math.floor(Math.random() * $('#board').width()) * .6 + 'px',
-          'top': Math.floor(Math.random() * $('#board').height()) * .6 + 'px',
+          'left': $('#board').position()['left'] + Math.floor(Math.random() * $('#board').width()) * .6 + 'px',
+          'top': $('#board').position()['top'] + Math.floor(Math.random() * $('#board').height()) * .6 + 'px',
           'position': 'absolute' 
         })
         .appendTo($('#board'));
