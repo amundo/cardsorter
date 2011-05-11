@@ -7,7 +7,8 @@ $(document).ready(function(){
         'css': {'position': 'absolute', 'top': sticky.top, 'left': sticky.left} ,
         'class': 'sticky',
         'text': sticky.text
-      }).appendTo('#board')
+      })
+      .appendTo('#board')
     })
   }
 
