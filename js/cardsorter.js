@@ -76,8 +76,9 @@ $(document).ready(function(){
 
      var stickies = readStickies();
 
+     $('body').html('');
      $.each(stickies, function(i, sticky){
-       console.log(sticky.text);       
+       $('body').append('<p>' + sticky.text + '</p>');
      })
 
   })
