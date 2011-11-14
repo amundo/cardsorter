@@ -1,16 +1,22 @@
 $(document).ready(function(){
 
-  if(localStorage.stickies){
-    var stickies = JSON.parse(localStorage.stickies);   
-    $.each(stickies, function(i,sticky){
-      $('<div>', {
-        'css': {'position': 'absolute', 'top': sticky.top, 'left': sticky.left} ,
-        'class': 'sticky',
-        'text': sticky.text
-      })
-      .appendTo('#board')
-    })
+
+  function readStickies(){
+    if(localStorage.stickies){
+      return JSON.parse(localStorage.stickies);   
+    }
   }
+
+
+  var stickies = readStickies();
+  $.each(stickies, function(i,sticky){
+    $('<div>', {
+      'css': {'position': 'absolute', 'top': sticky.top, 'left': sticky.left} ,
+      'class': 'sticky',
+      'text': sticky.text
+    })
+    .appendTo('#board')
+  })
 
   $('.sticky').draggable();
 
@@ -66,8 +72,15 @@ $(document).ready(function(){
     localStorage.stickies = JSON.stringify(stickies);
   })
 
+  $('#export').click(function(ev){
 
+     var stickies = readStickies();
 
+     $.each(stickies, function(i, sticky){
+       console.log(sticky.text);       
+     })
+
+  })
 
 })
 

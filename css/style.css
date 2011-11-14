@@ -94,7 +94,7 @@ button {
   margin: 1em;
 }
 
-button#save { 
+nav#controls { 
   right:0;
   bottom:0;
   position:fixed;
