@@ -84,20 +84,16 @@ $(document).ready(function(){
 
   function byPosition(a,b){
 
-      aTop = parseFloat(a['top']);
-      aLeft = parseFloat(a.left);
-      bTop = parseFloat(b['top']);
-      bLeft = parseFloat(b.left);
+    var ay = parseFloat(a['top']),
+        ax = parseFloat(a['left']),
+        by = parseFloat(b['top']),
+        bx = parseFloat(b['left']);
 
-      if (aTop < bTop && aLeft < bLeft ){
-         return -1;
-         console.log(aTop,bTop);
-
-      } else if (aTop > bTop && aLeft > bLeft ) {
-        return 1;
-      } else { 
-        return 0;
-      }
+    if (ay == by) {
+      return ax - bx ;
+    } else { 
+      return ay - by ;
+    }
 
   }
 
