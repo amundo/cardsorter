@@ -11,6 +11,7 @@ $(document).ready(function(){
 
 
   var stickies = Cards.readStickies();
+
   $.each(stickies, function(i,sticky){
     $('<div>', {
       'css': {'position': 'absolute', 'top': sticky.top, 'left': sticky.left} ,
@@ -73,21 +74,25 @@ $(document).ready(function(){
       }) 
     })  
   
-    localStorage.stickies = JSON.stringify(stickies);
+    Cards.saveStickies();
   })
 
 
+  Cards.saveStickies  = function(){
+    localStorage.stickies = JSON.stringify(stickies);
+  };
+
   function byPosition(a,b){
 
-    console.log(a,b);
-
-      aTop = parseFloat(a.top);
+      aTop = parseFloat(a['top']);
       aLeft = parseFloat(a.left);
-      bTop = parseFloat(b.top);
+      bTop = parseFloat(b['top']);
       bLeft = parseFloat(b.left);
 
       if (aTop < bTop && aLeft < bLeft ){
          return -1;
+         console.log(aTop,bTop);
+
       } else if (aTop > bTop && aLeft > bLeft ) {
         return 1;
       } else { 
@@ -101,6 +106,8 @@ $(document).ready(function(){
      var stickies = Cards.readStickies();
 
      stickies.sort(byPosition);
+
+     Cards.saveStickies();
 
      $('#save').click();
 
