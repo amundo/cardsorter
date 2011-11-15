@@ -45,8 +45,8 @@ div.sticky {
   cursor: pointer;
   background: yellow;
   font-size: small;
-  width: 75px;  
-  height: 75px;  
+  width: 100px;  
+  height: 100px;  
   border: 1px solid #FFCD00;  
   border-top: 10px solid #FFCD00;  
  } 
@@ -56,9 +56,9 @@ div.hidden {
 }
 
 #board .sticky{
-   -webkit-transform:rotate(-2deg);  
-   -o-transform:rotate(-2deg);  
-   -moz-transform:rotate(-2deg);  
+   -webkit-transform:rotate(-1deg);  
+   -o-transform:rotate(-1deg);  
+   -moz-transform:rotate(-1deg);  
 }
 
 #board div:nth-child(even) {  

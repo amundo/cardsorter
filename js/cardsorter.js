@@ -1,14 +1,16 @@
+window.Cards = {};
+
 $(document).ready(function(){
 
 
-  function readStickies(){
+  Cards.readStickies  = function (){
     if(localStorage.stickies){
       return JSON.parse(localStorage.stickies);   
     }
   }
 
 
-  var stickies = readStickies();
+  var stickies = Cards.readStickies();
   $.each(stickies, function(i,sticky){
     $('<div>', {
       'css': {'position': 'absolute', 'top': sticky.top, 'left': sticky.left} ,
@@ -47,6 +49,8 @@ $(document).ready(function(){
 
         $('.sticky').draggable();
 
+        $('#save').click();
+
     }
 
   });
@@ -72,9 +76,33 @@ $(document).ready(function(){
     localStorage.stickies = JSON.stringify(stickies);
   })
 
+
+  function byPosition(a,b){
+
+    console.log(a,b);
+
+      aTop = parseFloat(a.top);
+      aLeft = parseFloat(a.left);
+      bTop = parseFloat(b.top);
+      bLeft = parseFloat(b.left);
+
+      if (aTop < bTop && aLeft < bLeft ){
+         return -1;
+      } else if (aTop > bTop && aLeft > bLeft ) {
+        return 1;
+      } else { 
+        return 0;
+      }
+
+  }
+
   $('#export').click(function(ev){
 
-     var stickies = readStickies();
+     var stickies = Cards.readStickies();
+
+     stickies.sort(byPosition);
+
+     $('#save').click();
 
      $('body').html('');
      $.each(stickies, function(i, sticky){
