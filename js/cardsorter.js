@@ -72,7 +72,13 @@ $(document).ready(function(){
         'position': $(this).css('position'),
         'text': $(this).text(),
       }) 
+
+      $('#status').text('saved!').fadeOut(1600, function(){ 
+        $('#status').text('').show();
+      })
     })  
+
+ 
   
     Cards.saveStickies();
   })
