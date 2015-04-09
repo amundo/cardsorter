@@ -73,9 +73,6 @@ $(document).ready(function(){
         'text': $(this).text(),
       }) 
 
-      $('#status').text('saved!').fadeOut(1600, function(){ 
-        $('#status').text('').show();
-      })
     })  
 
  
@@ -86,6 +83,9 @@ $(document).ready(function(){
 
   Cards.saveStickies  = function(){
     localStorage.stickies = JSON.stringify(stickies);
+    $('#status').text('saved!').fadeOut(1600, function(){ 
+      $('#status').text('').show();
+    })
   };
 
   function byPosition(a,b){
@@ -119,6 +119,11 @@ $(document).ready(function(){
      })
 
   })
+
+  setInterval(function(){
+    Cards.saveStickies();
+    console.log(Cards);
+  }, 15 *  1000);
 
 })
 
