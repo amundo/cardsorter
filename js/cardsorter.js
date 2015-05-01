@@ -6,6 +6,8 @@ $(document).ready(function(){
   Cards.readStickies  = function (){
     if(localStorage.stickies){
       return JSON.parse(localStorage.stickies);   
+    } else { 
+      return [];
     }
   }
 
@@ -75,8 +77,6 @@ $(document).ready(function(){
 
     })  
 
- 
-  
     Cards.saveStickies();
   })
 
